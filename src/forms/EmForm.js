@@ -1,6 +1,6 @@
-import React, {useContext} from 'react';
-import {isNullOrUndefined} from 'common/utilities';
-import {FormGroupContext} from './EmForms';
+import React, { useContext } from "react";
+import { isNullOrUndefined } from "./EmForms";
+import { FormGroupContext } from "./EmForms";
 
 function EmForm(props) {
   const {
@@ -9,9 +9,9 @@ function EmForm(props) {
     formName,
     validator,
     bindValue = true,
-    valuePropName = 'value',
-    onChangePropName = 'onChange',
-    valueFunc = e => {
+    valuePropName = "value",
+    onChangePropName = "onChange",
+    valueFunc = (e) => {
       return e;
     },
     ...rest
@@ -28,7 +28,7 @@ function EmForm(props) {
     }
   }
 
-  const onChangeCallback = e => {
+  const onChangeCallback = (e) => {
     if (!isNullOrUndefined(emFormsObj)) {
       emFormsObj.setFormValue(formName, valueFunc(e));
       if (emFormsObj.config.errorMessageTriggers.change) {
@@ -40,7 +40,7 @@ function EmForm(props) {
     }
   };
 
-  const onBlurCallback = e => {
+  const onBlurCallback = (e) => {
     if (!isNullOrUndefined(emFormsObj)) {
       if (emFormsObj.config.errorMessageTriggers.touch) {
         emFormsObj.setFormTouch(formName, true);
@@ -51,7 +51,7 @@ function EmForm(props) {
     }
   };
 
-  let newProps = {[onChangePropName]: e => onChangeCallback(e), onBlur: e => onBlurCallback(e)};
+  let newProps = { [onChangePropName]: (e) => onChangeCallback(e), onBlur: (e) => onBlurCallback(e) };
   if (bindValue) {
     newProps[valuePropName] = emFormsObj.getFormValue(formName);
   }
