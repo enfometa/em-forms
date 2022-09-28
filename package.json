@@ -2,7 +2,7 @@
   "name": "@enfometa/em-forms",
   "description": "A simple react library for forms validation",
   "main": "dist/index.js",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "private": false,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
