@@ -28,7 +28,7 @@ class EmFormsCore {
     this.formsGroup.forms.map((form) => {
       if (form.validators != undefined) {
         form.validators.map((validator) => {
-          if (this.isValid(form.name, validator.name) === false) {
+          if (this.isValidFormValidator(form.name, validator.name) === false) {
             isValid = false;
           }
         });
@@ -37,12 +37,12 @@ class EmFormsCore {
     return isValid;
   };
 
-  isValid = (formName) => {
+  isValidForm = (formName) => {
     let isValid = true;
     let form = this.getForm(formName);
     if (form !== undefined) {
       form.validators.map((validator) => {
-        if (this.isValid(form.name, validator.name) === false) {
+        if (this.isValidFormValidator(form.name, validator.name) === false) {
           isValid = false;
         }
       });
@@ -50,7 +50,7 @@ class EmFormsCore {
     return isValid;
   };
 
-  isValid = (formName, validatorName) => {
+  isValidFormValidator = (formName, validatorName) => {
     let isValid = true;
     let form = this.getForm(formName);
     if (form !== undefined && form.validators !== undefined) {
@@ -70,7 +70,7 @@ class EmFormsCore {
     let form = this.getForm(formName);
     if (form !== undefined && form.validators !== undefined) {
       form.validators.map((validator) => {
-        let isValid = this.isValid(form.name, validator.name);
+        let isValid = this.isValidFormValidator(form.name, validator.name);
         if (!isValid) {
           errors.push({ validatorName: validator.name, message: validator.message });
         }
@@ -116,7 +116,7 @@ class EmFormsCore {
   };
 
   showError = (formName, validator) => {
-    let isValid = this.isValid(formName, validator);
+    let isValid = this.isValidFormValidator(formName, validator);
     let touched = this.getFormTouch(formName);
 
     let showMessage = false;
