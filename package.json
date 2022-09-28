@@ -1,5 +1,5 @@
 {
-  "name": "@enfometa/emforms",
+  "name": "@enfometa/em-forms",
   "description": "A simple react library for forms validation",
   "main": "dist/index.js",
   "version": "0.1.0",
