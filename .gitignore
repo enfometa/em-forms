@@ -24,3 +24,5 @@ yarn-error.log*
 
 #pack
 *.tgz
+.vs/slnx.sqlite
+dist/index.js
