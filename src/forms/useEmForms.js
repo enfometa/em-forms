@@ -1,5 +1,5 @@
-import {useState, useRef} from 'react';
-import EmFormsCore from './EmFormsCore';
+import { useState, useRef } from "react";
+import EmFormsCore from "./EmFormsCore";
 
 function useEmForms(formsObj) {
   const [forms, setForms] = useState(formsObj);
@@ -8,7 +8,7 @@ function useEmForms(formsObj) {
     emFormsRef.current = new EmFormsCore({
       forms: forms.forms,
       handleStateUpdate: () => {
-        setForms({...forms});
+        setForms({ ...forms });
         if (!emFormsRef.current == undefined) {
           emFormsRef.current.setFormsObj(forms);
         }
@@ -17,7 +17,7 @@ function useEmForms(formsObj) {
     });
   }, []);
 
-  return [emFormsRef.current];
+  return emFormsRef.current;
 }
 
 export default useEmForms;
