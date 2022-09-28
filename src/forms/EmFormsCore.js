@@ -1,16 +1,16 @@
-import {isNullOrUndefined, isObject, mergeDeep} from './EmForms';
+import { isNullOrUndefined, isObject, mergeDeep } from "./EmForms";
 
 class EmFormsCore {
   formsGroup = null;
   model = null;
-  allowAddProp = false;
+  allowAddProps = false;
   constructor(formsObject) {
     this.formsGroup = formsObject;
     this.setTouch(false);
 
     //default config
     this.config = {
-      errorMessageTriggers: {touch: true, change: true},
+      errorMessageTriggers: { touch: true, change: true },
     };
 
     //override config provided by user call
@@ -25,10 +25,10 @@ class EmFormsCore {
 
   isValid = () => {
     let isValid = true;
-    this.formsGroup.forms.map(form => {
+    this.formsGroup.forms.map((form) => {
       if (form.validators != undefined) {
-        form.validators.map(validator => {
-          if (this.isValidFormValidator(form.name, validator.name) === false) {
+        form.validators.map((validator) => {
+          if (this.isValid(form.name, validator.name) === false) {
             isValid = false;
           }
         });
@@ -37,12 +37,12 @@ class EmFormsCore {
     return isValid;
   };
 
-  isValidForm = formName => {
+  isValid = (formName) => {
     let isValid = true;
     let form = this.getForm(formName);
     if (form !== undefined) {
-      form.validators.map(validator => {
-        if (this.isValidFormValidator(form.name, validator.name) === false) {
+      form.validators.map((validator) => {
+        if (this.isValid(form.name, validator.name) === false) {
           isValid = false;
         }
       });
@@ -50,11 +50,11 @@ class EmFormsCore {
     return isValid;
   };
 
-  isValidFormValidator = (formName, validatorName) => {
+  isValid = (formName, validatorName) => {
     let isValid = true;
     let form = this.getForm(formName);
     if (form !== undefined && form.validators !== undefined) {
-      let validators = form.validators.filter(v => v.name === validatorName);
+      let validators = form.validators.filter((v) => v.name === validatorName);
       if (validators.length > 0) {
         let validator = validators[0];
         if (validator.func(form, this, validator.param) == false) {
@@ -65,14 +65,14 @@ class EmFormsCore {
     return isValid;
   };
 
-  getFormErrors = formName => {
+  getFormErrors = (formName) => {
     let errors = [];
     let form = this.getForm(formName);
     if (form !== undefined && form.validators !== undefined) {
-      form.validators.map(validator => {
-        let isValid = this.isValidFormValidator(form.name, validator.name);
+      form.validators.map((validator) => {
+        let isValid = this.isValid(form.name, validator.name);
         if (!isValid) {
-          errors.push({validatorName: validator.name, message: validator.message});
+          errors.push({ validatorName: validator.name, message: validator.message });
         }
       });
     }
@@ -81,7 +81,7 @@ class EmFormsCore {
 
   getFormError = (formName, validatorName) => {
     let errors = this.getFormErrors(formName);
-    let validatorErrors = errors.filter(err => err.validatorName == validatorName);
+    let validatorErrors = errors.filter((err) => err.validatorName == validatorName);
     return validatorErrors.length > 0 ? validatorErrors[0] : null;
   };
 
@@ -92,7 +92,7 @@ class EmFormsCore {
 
   getErrors = () => {
     let errors = [];
-    this.formsGroup.forms.map(form => {
+    this.formsGroup.forms.map((form) => {
       let formErrors = this.getFormErrors(form.name);
       errors = [...errors, ...formErrors];
     });
@@ -107,7 +107,7 @@ class EmFormsCore {
     return isValid;
   };
 
-  validateForm = formName => {
+  validateForm = (formName) => {
     let isValid = this.isValid(formName);
     this.setTouch(formName, true);
     this.updateParentState();
@@ -116,7 +116,7 @@ class EmFormsCore {
   };
 
   showError = (formName, validator) => {
-    let isValid = this.isValidFormValidator(formName, validator);
+    let isValid = this.isValid(formName, validator);
     let touched = this.getFormTouch(formName);
 
     let showMessage = false;
@@ -132,12 +132,12 @@ class EmFormsCore {
   };
 
   reset = (values, excludeValues) => {
-    this.formsGroup.forms.map(form => {
+    this.formsGroup.forms.map((form) => {
       let formName = form.name;
 
       let exclude = false;
       if (excludeValues != undefined && excludeValues != null) {
-        if (excludeValues.filter(ev => ev.name == formName).length > 0) {
+        if (excludeValues.filter((ev) => ev.name == formName).length > 0) {
           exclude = true;
         }
       }
@@ -147,7 +147,7 @@ class EmFormsCore {
           form.value = form.resetValue;
         }
         if (values != undefined && values != null) {
-          let forms = values.filter(f => f.name == formName);
+          let forms = values.filter((f) => f.name == formName);
           if (forms.length > 0) {
             form.value = forms[0].value;
           }
@@ -161,7 +161,7 @@ class EmFormsCore {
   setFormValue = (formName, value) => {
     if (value != null) {
       let strVal = value.toString();
-      if (strVal.includes('/Date(')) {
+      if (strVal.includes("/Date(")) {
         value = new Date(parseInt(strVal.substr(6)));
       }
     }
@@ -169,7 +169,7 @@ class EmFormsCore {
     if (form !== undefined && form !== null) {
       form.value = value;
       if (!isNullOrUndefined(this.model)) {
-        if (this.model[formName] !== undefined || this.allowAddProp) {
+        if (this.model[formName] !== undefined || this.allowAddProps) {
           this.model[formName] = value;
         }
       }
@@ -192,14 +192,14 @@ class EmFormsCore {
     }
   };
 
-  setTouch = touched => {
-    this.formsGroup.forms.map(form => {
+  setTouch = (touched) => {
+    this.formsGroup.forms.map((form) => {
       this.setFormTouch(form.name, touched);
     });
   };
 
-  setMode = mode => {
-    this.formsGroup.forms.map(form => {
+  setMode = (mode) => {
+    this.formsGroup.forms.map((form) => {
       form.mode = mode;
     });
     this.updateParentState();
@@ -211,8 +211,8 @@ class EmFormsCore {
     }
   };
 
-  getForm = formName => {
-    let form = this.formsGroup.forms.filter(form => form.name === formName);
+  getForm = (formName) => {
+    let form = this.formsGroup.forms.filter((form) => form.name === formName);
     if (form.length > 0) {
       return form[0];
     } else {
@@ -220,21 +220,21 @@ class EmFormsCore {
     }
   };
 
-  getFormValue = formName => {
+  getFormValue = (formName) => {
     let form = this.getForm(formName);
     if (form !== null && form.value !== undefined) {
       return form.value;
     }
   };
 
-  getFormMode = formName => {
+  getFormMode = (formName) => {
     let form = this.getForm(formName);
     if (form !== null && form.mode !== undefined) {
       return form.mode;
     }
   };
 
-  getFormTouch = formName => {
+  getFormTouch = (formName) => {
     let form = this.getForm(formName);
     let touched = false;
     if (form !== null && form.touched !== undefined) {
@@ -254,13 +254,13 @@ class EmFormsCore {
 
   setValuesFromModel = (obj, values) => {
     if (obj !== null) {
-      Object.keys(obj).map(item => {
+      Object.keys(obj).map((item) => {
         this.setFormValue(item, obj[item]);
       });
     }
 
     if (values !== undefined && values !== null) {
-      values.map(value => {
+      values.map((value) => {
         let form = this.getForm(value.name);
         if (form !== null) {
           form.value = value.value;
@@ -269,9 +269,9 @@ class EmFormsCore {
     }
   };
 
-  setModel = (model, allowAddProp = false) => {
+  setModel = (model, allowAddProps = false) => {
     this.model = model;
-    this.allowAddProp = allowAddProp;
+    this.allowAddProps = allowAddProps;
     this.setValuesFromModel(model);
   };
 }
