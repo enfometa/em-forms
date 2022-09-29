@@ -1,4 +1,6 @@
 const path = require("path");
+const CopyPlugin = require("copy-webpack-plugin");
+
 module.exports = {
   entry: path.join(__dirname, "index.js"),
   mode: "production",
@@ -25,4 +27,9 @@ module.exports = {
   externals: {
     react: "react",
   },
+  plugins: [
+    new CopyPlugin({
+      patterns: [{ from: "index.d.ts", to: "index.d.ts" }],
+    }),
+  ],
 };
