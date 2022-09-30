@@ -11,6 +11,8 @@ declare module "@enfometa/em-forms" {
   }
   interface EmFormsObj {
     forms: EmForm[];
+    handleStateUpdate: () => void;
+    config: EmFormsConfig;
   }
 
   interface FormError {
@@ -23,7 +25,17 @@ declare module "@enfometa/em-forms" {
     value: any;
   }
 
+  interface EmFormsTriggersCofig {
+    touch: boolean = true;
+    change: boolean = true;
+  }
+
+  interface EmFormsConfig {
+    errorMessageTriggers: EmFormsTriggersCofig;
+  }
+
   interface EmFormsCore {
+    new (emForms: EmFormsObj);
     setFormsObj(emForms: EmFormsObj): void;
     isValid(): boolean;
     isValidForm(formName: string): boolean;
@@ -46,8 +58,6 @@ declare module "@enfometa/em-forms" {
     setValuesFromModel(obj: any): void;
     setValues(values: EmForm): void;
     setModel(model: any, allowAddProps: boolean = false): void;
-
-    setFormValue(formName: string, value: any): void;
   }
 
   export function useEmForms(emForms: EmFormsObj): EmFormsCore;
