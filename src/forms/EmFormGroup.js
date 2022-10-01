@@ -1,9 +1,7 @@
 import React from "react";
 import { FormGroupContext } from "./EmForms";
 
-function EmFormGroup(props) {
-  const { children, emForms, ...rest } = props;
-
+function EmFormGroup({ children, emForms }) {
   return <FormGroupContext.Provider value={{ emForms: emForms }}>{children}</FormGroupContext.Provider>;
 }
 

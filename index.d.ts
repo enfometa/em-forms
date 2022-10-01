@@ -34,6 +34,23 @@ declare module "@enfometa/em-forms" {
     errorMessageTriggers: EmFormsTriggersCofig;
   }
 
+  interface EmFormGroupProps {
+    emForms: EmFormsObj;
+  }
+
+  interface EmFormProps extends EmFormGroupProps {
+    formName: string;
+    bindValue: boolean = true;
+    valuePropName: string;
+    onChangePropName: string;
+    valueFunc: () => any;
+  }
+
+  interface EmFormErrorProps extends EmFormGroupProps {
+    formName: string;
+    validatorName: string;
+  }
+
   interface EmFormsCore {
     new (emForms: EmFormsObj);
     setFormsObj(emForms: EmFormsObj): void;
@@ -61,4 +78,9 @@ declare module "@enfometa/em-forms" {
   }
 
   export function useEmForms(emForms: EmFormsObj): EmFormsCore;
+
+  export function EmFormGroup(props: EmFormGroupProps): React.FC;
+  export function EmForm(props: EmFormProps): React.FC;
+  export function EmFormError(props: EmFormErrorProps): React.FC;
+  export function EmFormErrorMessage(props: EmFormErrorProps): React.FC;
 }

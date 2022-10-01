@@ -2,20 +2,17 @@ import React, { useContext } from "react";
 import { isNullOrUndefined } from "./EmForms";
 import { FormGroupContext } from "./EmForms";
 
-function EmForm(props) {
-  const {
-    children,
-    emForms,
-    formName,
-    validator,
-    bindValue = true,
-    valuePropName = "value",
-    onChangePropName = "onChange",
-    valueFunc = (e) => {
-      return e;
-    },
-    ...rest
-  } = props;
+function EmForm({
+  children,
+  emForms,
+  formName,
+  bindValue = true,
+  valuePropName = "value",
+  onChangePropName = "onChange",
+  valueFunc = (e) => {
+    return e;
+  },
+}) {
   const [firstChild, ...others] = Array.isArray(children) ? children : [children];
 
   const formGroupContext = useContext(FormGroupContext);

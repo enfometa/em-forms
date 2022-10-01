@@ -2,9 +2,7 @@ import React, { useContext } from "react";
 import { isNullOrUndefined } from "./EmForms";
 import { FormGroupContext } from "./EmForms";
 
-function EmFormError(props) {
-  const { emForms, formName, validatorName, children, ...rest } = props;
-
+function EmFormError({ emForms, formName, validatorName, children }) {
   const formGroupContext = useContext(FormGroupContext);
   let emFormsObj = null;
   if (!isNullOrUndefined(emForms)) {
