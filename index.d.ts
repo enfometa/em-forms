@@ -12,7 +12,7 @@ declare module "@enfometa/em-forms" {
   interface EmFormsObj {
     forms: EmForm[];
     handleStateUpdate: () => void;
-    config: EmFormsConfig;
+    config?: EmFormsConfig;
   }
 
   interface FormError {
@@ -47,7 +47,7 @@ declare module "@enfometa/em-forms" {
     validate(): boolean;
     validateForm(formName: string): boolean;
     resetForm(formName: string, value: any): void;
-    reset(values: ResetConfig[] | null, excludeForms: ResetConfig | null): void;
+    reset(values?: ResetConfig[] | null, excludeForms?: ResetConfig | null): void;
     setFormValue(formName: string, value: any): void;
     setFormTouch(formName: string, touched: boolean): void;
     setTouch(touched: boolean): void;
