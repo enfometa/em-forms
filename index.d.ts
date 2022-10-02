@@ -1,4 +1,11 @@
 declare module "@enfometa/em-forms" {
+  interface emFormsGlobalConfig {
+    emFormValueFunc: (e: UIEvent) => void;
+    emFormbindValue: boolean = true;
+    emFormValuePropName: string = "value";
+    emFormonChangePropName: string = "onChange";
+  }
+
   interface Validators {
     name: string;
     func: (form: EmForm, emForm: EmFormsObj, param: any) => boolean;

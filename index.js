@@ -5,7 +5,7 @@ import EmFormGroup from "./src/forms/EmFormGroup";
 import EmFormError from "./src/forms/EmFormError";
 import EmFormErrorMessage from "./src/forms/EmFormErrorMessage";
 import { required, maxLength, minLength, pattern, email, requiredIf, compare } from "./src/forms/EmFormsValidators";
-//import { FormGroupContext, isNullOrUndefined, mergeDeep, isObject } from "./src/forms/EmForms";
+import { emFormsGlobalConfig } from "./src/forms/EmForms";
 
 export {
   EmFormsCore,
@@ -21,4 +21,5 @@ export {
   EmFormGroup,
   EmFormError,
   EmFormErrorMessage,
+  emFormsGlobalConfig,
 };

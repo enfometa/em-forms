@@ -1,20 +1,29 @@
-import React from 'react';
-import EmFormsCore from './EmFormsCore';
-import useEmForms from './useEmForms';
-import EmForm from './EmForm';
-import EmFormGroup from './EmFormGroup';
-import EmFormError from './EmFormError';
-import EmFormErrorMessage from './EmFormErrorMessage';
-import {required, maxLength, minLength, pattern, email, requiredIf, compare} from './EmFormsValidators';
+import React from "react";
+import EmFormsCore from "./EmFormsCore";
+import useEmForms from "./useEmForms";
+import EmForm from "./EmForm";
+import EmFormGroup from "./EmFormGroup";
+import EmFormError from "./EmFormError";
+import EmFormErrorMessage from "./EmFormErrorMessage";
+import { required, maxLength, minLength, pattern, email, requiredIf, compare } from "./EmFormsValidators";
 
 const FormGroupContext = React.createContext();
 
-const isNullOrUndefined = obj => {
+const emFormsGlobalConfig = {
+  emFormValueFunc: (e) => {
+    return e;
+  },
+  emFormbindValue: true,
+  emFormValuePropName: "value",
+  emFormonChangePropName: "onChange",
+};
+
+const isNullOrUndefined = (obj) => {
   return obj == null || obj == undefined;
 };
 
-const isObject = item => {
-  return item && typeof item === 'object' && !Array.isArray(item);
+const isObject = (item) => {
+  return item && typeof item === "object" && !Array.isArray(item);
 };
 
 const mergeDeep = (target, ...sources) => {
@@ -58,4 +67,5 @@ export {
   isNullOrUndefined,
   mergeDeep,
   isObject,
+  emFormsGlobalConfig,
 };

@@ -1,17 +1,16 @@
 import React, { useContext } from "react";
 import { isNullOrUndefined } from "./EmForms";
 import { FormGroupContext } from "./EmForms";
+import { emFormsGlobalConfig } from "./EmForms";
 
 function EmForm({
   children,
   emForms,
   formName,
-  bindValue = true,
-  valuePropName = "value",
-  onChangePropName = "onChange",
-  valueFunc = (e) => {
-    return e;
-  },
+  bindValue = emFormsGlobalConfig.emFormbindValue,
+  valuePropName = emFormsGlobalConfig.emFormValuePropName,
+  onChangePropName = emFormsGlobalConfig.emFormonChangePropName,
+  valueFunc = emFormsGlobalConfig.emFormValueFunc,
 }) {
   const [firstChild, ...others] = Array.isArray(children) ? children : [children];
 
