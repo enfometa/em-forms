@@ -1,70 +1,91 @@
-# Getting Started with Create React App
+# Introduction
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Simple, robust and felxible react forms validation library you can use in both React Js and React Native. The great thing about the library is, it has no dependency on the UI. You can easily decouple your business logic from the UI and can reuse in both React Js and React Native apps.
 
-## Available Scripts
+# Platforms
 
-In the project directory, you can run:
+- React Js
+- React Native
 
-### `npm start`
+# Installation
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+`npm install @enfometa/em-forms`
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+# Usage
 
-### `npm test`
+## Create forms object
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
+import { useEmForms, required, email, EmFormErrorMessage, EmFormGroup, EmForm } from "@enfometa/em-forms";
 
-### `npm run build`
+const forms = useEmForms({
+    forms: [
+      {
+        name: "username",
+        value: "",
+        validators: [
+          { name: "required", func: required, message: "Username is required" },
+          { name: "email", func: email, message: "Invalid email address" },
+        ],
+      },
+      {
+        name: "password",
+        value: "",
+        validators: [{ name: "required", func: required, message: "Password is required" }],
+      },
+    ],
+  });
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+  const login = () => {
+    if(forms.validate()){
+        //do something
+    }
+  };
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## UI implementation
 
-### `npm run eject`
+```
+  <EmFormGroup emForms={forms}>
+    <div>
+        <EmForm formName="username">
+            <input type="email" className="form-control" placeholder="Email" />
+        </EmForm>
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+        <div className="error-message">
+            <EmFormErrorMessage formName="username" validatorName="required" />
+            <EmFormErrorMessage formName="username" validatorName="email" />
+        </div>
+    </div>
+    <div>
+        <EmForm formName="password">
+            <input type="password" className="form-control" placeholder="password" />
+        </EmForm>
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+        <div className="error-message">
+            <EmFormErrorMessage formName="password" validatorName="required" />
+        </div>
+    </div>
+    <button className="w-100 btn btn-primary btn-lg" type="button" onClick={login}>
+        Login
+    </button>
+</EmFormGroup>
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+# Developer
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+enfometa
 
-## Learn More
+### Website
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+https://www.enfometa.com/
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Contact
 
-### Code Splitting
+Email  
+enfometa@gmail.com  
+hammad.se@live.com
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Cell  
+0092 333 5543744
