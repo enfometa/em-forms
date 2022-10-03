@@ -2,7 +2,7 @@
   "name": "@enfometa/em-forms",
   "description": "A simple react library for forms validation",
   "main": "dist/index.js",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "private": false,
   "keywords": [
     "react",
@@ -57,5 +57,9 @@
   },
   "files": [
     "/dist"
-  ]
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/enfometa/em-forms"
+  }
 }

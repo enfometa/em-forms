@@ -1,6 +1,6 @@
 # Introduction
 
-Simple, robust and felxible react forms validation library you can use in both React Js and React Native. The great thing about the library is, it has no dependency on the UI. You can easily decouple your business logic from the UI and can reuse in both React Js and React Native apps.
+A simple, robust and felxible react forms validation library for both React Js and React Native. The great thing about the library is, it has no dependency on the UI. You can easily decouple your business logic from the UI and can reuse in both React Js and React Native apps.
 
 # Platforms
 
