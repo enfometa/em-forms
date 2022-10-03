@@ -1,10 +1,14 @@
+import { emFormsGlobalConfig } from "./src/forms/common";
+
 declare module "@enfometa/em-forms" {
-  interface emFormsGlobalConfig {
+  interface EmFormsGlobalConfig {
     emFormValueFunc: (e: UIEvent) => void;
-    emFormbindValue: boolean = true;
+    emFormBindValue: boolean = true;
     emFormValuePropName: string = "value";
     emFormonChangePropName: string = "onChange";
   }
+
+  export const emFormsGlobalConfig: EmFormsGlobalConfig;
 
   interface Validators {
     name: string;

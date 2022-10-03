@@ -1,13 +1,13 @@
 import React, { useContext } from "react";
-import { isNullOrUndefined } from "./EmForms";
-import { FormGroupContext } from "./EmForms";
-import { emFormsGlobalConfig } from "./EmForms";
+import { isNullOrUndefined } from "./common";
+import { FormGroupContext } from "./common";
+import { emFormsGlobalConfig } from "./common";
 
 function EmForm({
   children,
   emForms,
   formName,
-  bindValue = emFormsGlobalConfig.emFormbindValue,
+  bindValue = emFormsGlobalConfig.emFormBindValue,
   valuePropName = emFormsGlobalConfig.emFormValuePropName,
   onChangePropName = emFormsGlobalConfig.emFormonChangePropName,
   valueFunc = emFormsGlobalConfig.emFormValueFunc,

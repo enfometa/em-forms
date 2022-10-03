@@ -1,4 +1,4 @@
-import { isNullOrUndefined, isObject, mergeDeep } from "./EmForms";
+import { isNullOrUndefined, isObject, mergeDeep } from "./common";
 
 class EmFormsCore {
   formsGroup = null;
