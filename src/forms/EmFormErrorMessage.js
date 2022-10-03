@@ -3,7 +3,7 @@ import { isNullOrUndefined } from "./common";
 import { FormGroupContext } from "./common";
 import EmFormError from "./EmFormError";
 
-function EmFormErrorMessage({ emForms, formName, validatorName }) {
+function EmFormErrorMessage({ emForms, formName, validatorName = null }) {
   const formGroupContext = useContext(FormGroupContext);
   let emFormsObj = null;
   if (!isNullOrUndefined(emForms)) {

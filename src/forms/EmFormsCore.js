@@ -86,8 +86,21 @@ class EmFormsCore {
   };
 
   getFormErrorMessage = (formName, validatorName) => {
-    let formError = this.getFormError(formName, validatorName);
-    return formError !== null ? formError.message : null;
+    let errorMsg = null;
+    if (!isNullOrUndefined(validatorName)) {
+      let formError = this.getFormError(formName, validatorName);
+      errorMsg = formError !== null ? formError.message : null;
+    } else {
+      let formErrors = this.getFormErrors(formName);
+      let errorMsgs = [];
+      formErrors.map((formError) => {
+        errorMsgs.push(formError.message);
+      });
+
+      errorMsg = errorMsgs.join(", ");
+    }
+
+    return errorMsg;
   };
 
   getErrors = () => {
@@ -241,7 +254,13 @@ class EmFormsCore {
 
   //private functions
   showError = (formName, validator) => {
-    let isValid = this.isValidFormValidator(formName, validator);
+    let isValid = false;
+    if (!isNullOrUndefined(validator)) {
+      isValid = this.isValidFormValidator(formName, validator);
+    } else {
+      isValid = this.isValidForm(formName);
+    }
+
     let touched = this.getFormTouch(formName);
 
     let showMessage = false;
