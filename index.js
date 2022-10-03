@@ -5,11 +5,12 @@ import EmFormGroup from "./src/forms/EmFormGroup";
 import EmFormError from "./src/forms/EmFormError";
 import EmFormErrorMessage from "./src/forms/EmFormErrorMessage";
 import { required, maxLength, minLength, pattern, email, requiredIf, compare } from "./src/forms/EmFormsValidators";
-import { emFormsGlobalConfig } from "./src/forms/common";
+import { emFormsGlobalConfig, initEmForms } from "./src/forms/common";
 
 export {
   EmFormsCore,
   useEmForms,
+  initEmForms,
   required,
   maxLength,
   minLength,

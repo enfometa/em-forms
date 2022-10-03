@@ -1,4 +1,5 @@
 import React from "react";
+import EmFormsCore from "./EmFormsCore";
 const FormGroupContext = React.createContext();
 
 const emFormsGlobalConfig = {
@@ -41,4 +42,8 @@ const mergeDeep = (target, ...sources) => {
   return mergeDeep(target, ...sources);
 };
 
-export { isNullOrUndefined, mergeDeep, isObject, emFormsGlobalConfig, FormGroupContext };
+const initEmForms = (formsObj) => {
+  return new EmFormsCore(formsObj);
+};
+
+export { isNullOrUndefined, mergeDeep, isObject, emFormsGlobalConfig, FormGroupContext, initEmForms };

@@ -89,6 +89,7 @@ declare module "@enfometa/em-forms" {
   }
 
   export function useEmForms(emForms: EmFormsObj): EmFormsCore;
+  export function initEmForms(emForms: EmFormsObj): EmFormsCore;
 
   export function EmFormGroup(props: EmFormGroupProps): React.FC;
   export function EmForm(props: EmFormProps): React.FC;
