@@ -59,7 +59,7 @@ declare module "@enfometa/em-forms" {
 
   interface EmFormErrorProps extends EmFormGroupProps {
     formName: string;
-    validatorName: string;
+    validatorName: string = null;
   }
 
   interface EmFormsCore {
@@ -70,7 +70,7 @@ declare module "@enfometa/em-forms" {
     isValidFormValidator(formName: string, validatorName: string): boolean;
     getFormErrors(formName: string): FormError[];
     getFormError(formName: string, validatorName: string): FormError | null;
-    getFormErrorMessage(formName: string, validatorName: string): string | null;
+    getFormErrorMessage(formName: string, validatorName: string = null): string | null;
     getErrors(): FormError[];
     validate(): boolean;
     validateForm(formName: string): boolean;
@@ -89,7 +89,7 @@ declare module "@enfometa/em-forms" {
   }
 
   export function useEmForms(emForms: EmFormsObj): EmFormsCore;
-  export function initEmForms(emForms: EmFormsObj): EmFormsCore;
+  export function initEmForms(forms: EmForm[], handleStateUpdate: () => void, config: EmFormsConfig = null): EmFormsCore;
 
   export function EmFormGroup(props: EmFormGroupProps): React.FC;
   export function EmForm(props: EmFormProps): React.FC;
