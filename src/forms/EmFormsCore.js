@@ -6,7 +6,7 @@ class EmFormsCore {
   allowAddProps = false;
   constructor(formsObject) {
     this.formsGroup = formsObject;
-    this.setTouch(false);
+    this.setDefaults();
 
     //default config
     this.config = {
@@ -276,6 +276,12 @@ class EmFormsCore {
     if (form !== null && form.mode !== undefined) {
       return form.mode;
     }
+  };
+
+  setDefaults = (touched) => {
+    this.formsGroup.forms.map((form) => {
+      form.touched = touched;
+    });
   };
 }
 
