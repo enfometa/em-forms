@@ -1,16 +1,14 @@
 import React from "react";
 const FormGroupContext = React.createContext();
 
-// const emFormsGlobalConfig = {
-//   emFormValueFunc: (e) => {
-//     return e;
-//   },
-//   emFormBindValue: true,
-//   emFormValuePropName: "value",
-//   emFormonChangePropName: "onChange",
-// };
-
-const emFormsGlobalConfig = () => {};
+const emFormsGlobalConfig = {
+  emFormValueFunc: (e) => {
+    return e;
+  },
+  emFormBindValue: true,
+  emFormValuePropName: "value",
+  emFormonChangePropName: "onChange",
+};
 
 const isNullOrUndefined = (obj) => {
   return obj == null || obj == undefined;

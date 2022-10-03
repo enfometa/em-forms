@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { isNullOrUndefined } from "./common";
-import { EmFormError, FormGroupContext } from "./common";
+import { FormGroupContext } from "./common";
+import EmFormError from "./EmFormError";
 
 function EmFormErrorMessage({ emForms, formName, validatorName }) {
   const formGroupContext = useContext(FormGroupContext);
