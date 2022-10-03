@@ -1,3 +1,4 @@
+import React from "react";
 import { emFormsGlobalConfig } from "./src/forms/common";
 
 declare module "@enfometa/em-forms" {
@@ -89,7 +90,7 @@ declare module "@enfometa/em-forms" {
   }
 
   export function useEmForms(emForms: EmFormsObj): EmFormsCore;
-  export function initEmForms(forms: EmForm[], handleStateUpdate: () => void, config: EmFormsConfig = null): EmFormsCore;
+  export function initEmForms(emForms: EmFormsObj, component: React.Component, stateKey: string): EmFormsCore;
 
   export function EmFormGroup(props: EmFormGroupProps): React.FC;
   export function EmForm(props: EmFormProps): React.FC;

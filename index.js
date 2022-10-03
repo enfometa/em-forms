@@ -1,11 +1,11 @@
 import EmFormsCore from "./src/forms/EmFormsCore";
-import useEmForms from "./src/forms/useEmForms";
+import { useEmForms, initEmForms } from "./src/forms/initializers";
 import EmForm from "./src/forms/EmForm";
 import EmFormGroup from "./src/forms/EmFormGroup";
 import EmFormError from "./src/forms/EmFormError";
 import EmFormErrorMessage from "./src/forms/EmFormErrorMessage";
 import { required, maxLength, minLength, pattern, email, requiredIf, compare } from "./src/forms/EmFormsValidators";
-import { emFormsGlobalConfig, initEmForms } from "./src/forms/common";
+import { emFormsGlobalConfig } from "./src/forms/common";
 
 export {
   EmFormsCore,

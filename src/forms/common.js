@@ -42,12 +42,4 @@ const mergeDeep = (target, ...sources) => {
   return mergeDeep(target, ...sources);
 };
 
-const initEmForms = (forms, handleStateUpdate, config = null) => {
-  return new EmFormsCore({
-    forms: forms,
-    handleStateUpdate: handleStateUpdate,
-    config: config,
-  });
-};
-
-export { isNullOrUndefined, mergeDeep, isObject, emFormsGlobalConfig, FormGroupContext, initEmForms };
+export { isNullOrUndefined, mergeDeep, isObject, emFormsGlobalConfig, FormGroupContext };
