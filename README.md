@@ -75,7 +75,7 @@ const forms = useEmForms({
 
 # Developer
 
-enfometa
+![Alt](/images/enfometa-logo.png "enfometa logo")
 
 ### Website
 
