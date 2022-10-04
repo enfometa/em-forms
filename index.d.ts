@@ -95,4 +95,13 @@ declare module "@enfometa/em-forms" {
   export function EmForm(props: EmFormProps): React.FC;
   export function EmFormError(props: EmFormErrorProps): React.FC;
   export function EmFormErrorMessage(props: EmFormErrorProps): React.FC;
+
+  export function required(form: EmForm, emForms: EmFormsObj, param: any): boolean;
+  export function maxLength(form: EmForm, emForms: EmFormsObj, param: any): boolean;
+  export function minLength(form: EmForm, emForms: EmFormsObj, param: any): boolean;
+  export function pattern(form: EmForm, emForms: EmFormsObj, param: any): boolean;
+  export function email(form: EmForm, emForms: EmFormsObj, param: any): boolean;
+  export function requiredIf(form: EmForm, emForms: EmFormsObj, param: any): boolean;
+  export function compare(form: EmForm, emForms: EmFormsObj, param: any): boolean;
+  export function range(form: EmForm, emForms: EmFormsObj, param: any): boolean;
 }
