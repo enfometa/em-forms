@@ -77,4 +77,17 @@ function compare(form, emForms, param) {
   return isValid;
 }
 
-export { required, maxLength, minLength, pattern, email, requiredIf, compare };
+function range(form, emForms, param) {
+  let isValid = true;
+  if (form.value !== undefined && form.value !== "" && form.value !== null) {
+    if (param !== undefined && param.min !== undefined && param.max !== undefined) {
+      let formValue = parseFloat(form.value);
+      if (formValue > param.max || formValue < param.min) {
+        isValid = false;
+      }
+    }
+  }
+  return isValid;
+}
+
+export { required, maxLength, minLength, pattern, email, requiredIf, compare, range };

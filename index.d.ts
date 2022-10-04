@@ -1,5 +1,4 @@
 import React from "react";
-import { emFormsGlobalConfig } from "./src/forms/common";
 
 declare module "@enfometa/em-forms" {
   interface EmFormsGlobalConfig {
