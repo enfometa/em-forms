@@ -11,15 +11,16 @@ declare module "@enfometa/em-forms" {
 
   export const emFormsGlobalConfig: EmFormsGlobalConfig;
 
-  interface Validators {
+  interface Validator {
     name: string;
     func: (form: EmForm, emForm: EmFormsObj, param: any) => boolean;
     message: string;
+    param?: any;
   }
   interface EmForm {
     name: string;
     value: any;
-    validators: Validators[];
+    validators: Validator[];
   }
   interface EmFormsObj {
     forms: EmForm[];
@@ -85,7 +86,7 @@ declare module "@enfometa/em-forms" {
     getFormTouch(formName: string): boolean;
     toModel(): any;
     setValuesFromModel(obj: any): void;
-    setValues(values: EmForm): void;
+    setValues(values: EmForm[]): void;
     setModel(model: any, allowAddProps: boolean = false): void;
   }
 
