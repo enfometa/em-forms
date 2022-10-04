@@ -155,7 +155,7 @@ class EmFormsCore {
       }
       if (!exclude) {
         form.value = null;
-        if (form.defaultValue) {
+        if (form.defaultValue !== undefined) {
           form.value = form.defaultValue;
         }
         if (values != undefined && values != null) {
@@ -309,7 +309,7 @@ class EmFormsCore {
 
   setDefaults = () => {
     this.formsGroup.forms.map((form) => {
-      form.touched = touched;
+      form.touched = false;
       form.defaultValue = form.value;
     });
   };
