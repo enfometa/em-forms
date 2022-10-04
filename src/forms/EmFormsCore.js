@@ -19,9 +19,9 @@ class EmFormsCore {
     }
   }
 
-  setFormsObj(formsObj) {
-    this.formsGroup = formsObj;
-  }
+  // setFormsObj(formsObj) {
+  //   this.formsGroup = formsObj;
+  // }
 
   isValid = () => {
     let isValid = true;
@@ -129,7 +129,17 @@ class EmFormsCore {
   };
 
   resetForm = (formName, value) => {
-    this.setFormValue(formName, value);
+    if (!isNullOrUndefined(value)) {
+      this.setFormValue(formName, value);
+    } else {
+      const form = this.getForm(formName);
+      let restValue = null;
+      if (!isNullOrUndefined(form.defaultValue)) {
+        restValue = form.defaultValue;
+        this.setFormValue(formName, restValue);
+      }
+    }
+
     this.setFormTouch(formName, false);
   };
 
@@ -145,8 +155,8 @@ class EmFormsCore {
       }
       if (!exclude) {
         form.value = null;
-        if (form.resetValue) {
-          form.value = form.resetValue;
+        if (form.defaultValue) {
+          form.value = form.defaultValue;
         }
         if (values != undefined && values != null) {
           let forms = values.filter((f) => f.name == formName);
@@ -297,9 +307,10 @@ class EmFormsCore {
     }
   };
 
-  setDefaults = (touched) => {
+  setDefaults = () => {
     this.formsGroup.forms.map((form) => {
       form.touched = touched;
+      form.defaultValue = form.value;
     });
   };
 }

@@ -66,7 +66,6 @@ declare module "@enfometa/em-forms" {
 
   interface EmFormsCore {
     new (emForms: EmFormsObj);
-    setFormsObj(emForms: EmFormsObj): void;
     isValid(): boolean;
     isValidForm(formName: string): boolean;
     isValidFormValidator(formName: string, validatorName: string): boolean;
