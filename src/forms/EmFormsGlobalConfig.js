@@ -28,34 +28,6 @@ class EmFormsGlobalConfig {
     }
   };
 
-  //   registerEmFormHtmlElements = () => {
-  //     this.emForm.elementRegister.push(
-  //       {
-  //         valuePropName: "value",
-  //         onChangePropName: "onChange",
-  //         valueFunc: (e) => e.target.value,
-  //         elements: [{ type: "input" }],
-  //       },
-  //       {
-  //         valuePropName: "value",
-  //         onChangePropName: "onChange",
-  //         valueFunc: (e) => e.target.value,
-  //         elements: [{ type: "select" }],
-  //       },
-  //       {
-  //         valuePropName: "checked",
-  //         onChangePropName: "onChange",
-  //         valueFunc: (e) => e.target.checked,
-  //         elements: [
-  //           {
-  //             type: "input",
-  //             props: [{ name: "type", value: "checkbox" }],
-  //           },
-  //         ],
-  //       }
-  //     );
-  //   };
-
   registerEmFormElements = (configArray) => {
     if (!isNullOrUndefined(configArray)) {
       configArray.forEach((item) => {
