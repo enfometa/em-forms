@@ -1,18 +1,43 @@
 import React, { useContext } from "react";
-import { isNullOrUndefined } from "./common";
+import { getMostSpecificConfig, isNullOrUndefined } from "./common";
 import { FormGroupContext } from "./common";
 import { emFormsGlobalConfig } from "./common";
+import EmFormsGlobalConfig from "./EmFormsGlobalConfig";
 
-function EmForm({
-  children,
-  emForms,
-  formName,
-  bindValue = emFormsGlobalConfig.emFormBindValue,
-  valuePropName = emFormsGlobalConfig.emFormValuePropName,
-  onChangePropName = emFormsGlobalConfig.emFormonChangePropName,
-  valueFunc = emFormsGlobalConfig.emFormValueFunc,
-}) {
-  const [firstChild, ...others] = Array.isArray(children) ? children : [children];
+function EmForm({ children, emForms, formName, bindValue, valuePropName, onChangePropName, valueFunc }) {
+  const [childElement] = Array.isArray(children) ? children : [children];
+
+  const finalConfig = {};
+
+  const setEmFormValuesFromRegister = () => {
+    //find element in the element register
+    const registerConfig = getMostSpecificConfig(childElement, emFormsGlobalConfig.emForm.elementRegister);
+
+    if (!isNullOrUndefined(registerConfig)) {
+      EmFormsGlobalConfig.setConfigValues(
+        finalConfig,
+        registerConfig.bindValue,
+        registerConfig.valuePropName,
+        registerConfig.onChangePropName,
+        registerConfig.valueFunc
+      );
+    }
+  };
+
+  //first assgin props values, priority = 1
+  EmFormsGlobalConfig.setConfigValues(finalConfig, bindValue, valuePropName, onChangePropName, valueFunc);
+
+  //search element in from register, priority = 2
+  setEmFormValuesFromRegister();
+
+  //assign from global config values, , priority = 3
+  EmFormsGlobalConfig.setConfigValues(
+    finalConfig,
+    emFormsGlobalConfig.emForm.bindValue,
+    emFormsGlobalConfig.emForm.valuePropName,
+    emFormsGlobalConfig.emForm.onChangePropName,
+    emFormsGlobalConfig.emForm.valueFunc
+  );
 
   const formGroupContext = useContext(FormGroupContext);
   let emFormsObj = null;
@@ -26,13 +51,13 @@ function EmForm({
 
   const onChangeCallback = (e) => {
     if (!isNullOrUndefined(emFormsObj)) {
-      emFormsObj.setFormValue(formName, valueFunc(e));
+      emFormsObj.setFormValue(formName, finalConfig.valueFunc(e));
       if (emFormsObj.config.errorMessageTriggers.change) {
         emFormsObj.setFormTouch(formName, true);
       }
     }
-    if (!isNullOrUndefined(firstChild.props.onChange)) {
-      firstChild.props.onChange(e);
+    if (!isNullOrUndefined(childElement.props.onChange)) {
+      childElement.props.onChange(e);
     }
   };
 
@@ -42,22 +67,17 @@ function EmForm({
         emFormsObj.setFormTouch(formName, true);
       }
     }
-    if (!isNullOrUndefined(firstChild.props.onBlur)) {
-      firstChild.props.onBlur(e);
+    if (!isNullOrUndefined(childElement.props.onBlur)) {
+      childElement.props.onBlur(e);
     }
   };
 
-  let newProps = { [onChangePropName]: (e) => onChangeCallback(e), onBlur: (e) => onBlurCallback(e) };
-  if (bindValue) {
-    newProps[valuePropName] = emFormsObj.getFormValue(formName);
+  let newProps = { [finalConfig.onChangePropName]: (e) => onChangeCallback(e), onBlur: (e) => onBlurCallback(e) };
+  if (finalConfig.bindValue) {
+    newProps[finalConfig.valuePropName] = emFormsObj.getFormValue(formName);
   }
 
-  return (
-    <React.Fragment>
-      {!isNullOrUndefined(firstChild) && React.cloneElement(firstChild, newProps)}
-      {others}
-    </React.Fragment>
-  );
+  return <React.Fragment>{!isNullOrUndefined(childElement) && React.cloneElement(childElement, newProps)}</React.Fragment>;
 }
 
 export default EmForm;
