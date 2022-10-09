@@ -90,8 +90,8 @@ declare module "@enfometa/em-forms" {
     getFormValue(formName: string): any;
     getFormTouch(formName: string): boolean;
     toModel(): any;
-    setValuesFromModel(obj: any): void;
-    setValues(values: EmForm[]): void;
+    setValuesFromModel(obj: any, setDefaults: boolean = true): void;
+    setValues(values: EmForm[], setDefaults: boolean = true): void;
     setModel(model: any, allowAddProps: boolean = false): void;
   }
 

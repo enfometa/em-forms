@@ -237,15 +237,18 @@ class EmFormsCore {
     return modelToUpdate;
   };
 
-  setValuesFromModel = (obj) => {
+  setValuesFromModel = (obj, setDefaults = true) => {
     if (obj !== null) {
       Object.keys(obj).map((item) => {
         this.setFormValue(item, obj[item]);
       });
     }
+    if (setDefaults) {
+      this.setDefaults();
+    }
   };
 
-  setValues = (values) => {
+  setValues = (values, setDefaults = true) => {
     if (values !== undefined && values !== null) {
       values.map((value) => {
         let form = this.getForm(value.name);
@@ -253,6 +256,9 @@ class EmFormsCore {
           form.value = value.value;
         }
       });
+    }
+    if (setDefaults) {
+      this.setDefaults();
     }
   };
 
