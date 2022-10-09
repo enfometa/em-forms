@@ -6,7 +6,8 @@ class EmFormsCore {
   allowAddProps = false;
   constructor(formsObject) {
     this.formsGroup = formsObject;
-    this.setDefaults();
+    this.setDefaultTouch();
+    this.setDefaultValues();
 
     //default config
     this.config = {
@@ -244,7 +245,7 @@ class EmFormsCore {
       });
     }
     if (setDefaults) {
-      this.setDefaults();
+      this.setDefaultValues();
     }
   };
 
@@ -258,7 +259,7 @@ class EmFormsCore {
       });
     }
     if (setDefaults) {
-      this.setDefaults();
+      this.setDefaultValues();
     }
   };
 
@@ -313,10 +314,16 @@ class EmFormsCore {
     }
   };
 
-  setDefaults = () => {
+  setDefaultValues = () => {
     this.formsGroup.forms.map((form) => {
       form.touched = false;
       form.defaultValue = form.value;
+    });
+  };
+
+  setDefaultTouch = () => {
+    this.formsGroup.forms.map((form) => {
+      form.touched = false;
     });
   };
 }
