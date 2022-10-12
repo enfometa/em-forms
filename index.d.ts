@@ -2,10 +2,10 @@ import React from "react";
 
 declare module "@enfometa/em-forms" {
   interface EmFormConfig {
-    emFormValueFunc: (e: UIEvent) => void;
-    emFormBindValue: boolean = true;
-    emFormValuePropName: string = "value";
-    emFormonChangePropName: string = "onChange";
+    valueFunc: (e: UIEvent) => void;
+    bindValue: boolean = true;
+    valuePropName: string = "value";
+    onChangePropName: string = "onChange";
   }
 
   interface EmFormsGlobalConfig {
