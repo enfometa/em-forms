@@ -41,13 +41,10 @@ class EmFormsGlobalConfig {
   };
 
   setEmFormGlobalConfig = (defaultConfig) => {
-    EmFormsGlobalConfig.setConfigValues(
-      this.emForm,
-      defaultConfig.bindValue,
-      defaultConfig.valuePropName,
-      defaultConfig.onChangePropName,
-      defaultConfig.valueFunc
-    );
+    this.emForm.bindValue = defaultConfig.bindValue;
+    this.emForm.valuePropName = defaultConfig.valuePropName;
+    this.emForm.onChangePropName = defaultConfig.onChangePropName;
+    this.emForm.valueFunc = defaultConfig.valueFunc;
   };
 }
 
