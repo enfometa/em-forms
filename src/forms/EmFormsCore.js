@@ -1,11 +1,11 @@
 import { isNullOrUndefined, isObject, mergeDeep } from "./common";
 
 class EmFormsCore {
-  formsGroup = null;
+  formsConfig = null;
   model = null;
   allowAddProps = false;
   constructor(formsObject) {
-    this.formsGroup = formsObject;
+    this.formsConfig = formsObject;
     this.setDefaultTouch();
     this.setDefaultValues();
 
@@ -21,12 +21,12 @@ class EmFormsCore {
   }
 
   // setFormsObj(formsObj) {
-  //   this.formsGroup = formsObj;
+  //   this.formsConfig = formsObj;
   // }
 
   isValid = () => {
     let isValid = true;
-    this.formsGroup.forms.map((form) => {
+    this.formsConfig.forms.map((form) => {
       if (form.validators != undefined) {
         form.validators.map((validator) => {
           if (this.isValidFormValidator(form.name, validator.name) === false) {
@@ -106,7 +106,7 @@ class EmFormsCore {
 
   getErrors = () => {
     let errors = [];
-    this.formsGroup.forms.map((form) => {
+    this.formsConfig.forms.map((form) => {
       let formErrors = this.getFormErrors(form.name);
       errors = [...errors, ...formErrors];
     });
@@ -145,7 +145,7 @@ class EmFormsCore {
   };
 
   reset = (values, excludeForms) => {
-    this.formsGroup.forms.map((form) => {
+    this.formsConfig.forms.map((form) => {
       let formName = form.name;
 
       let exclude = false;
@@ -199,13 +199,13 @@ class EmFormsCore {
   };
 
   setTouch = (touched) => {
-    this.formsGroup.forms.map((form) => {
+    this.formsConfig.forms.map((form) => {
       this.setFormTouch(form.name, touched);
     });
   };
 
   getForm = (formName) => {
-    let form = this.formsGroup.forms.filter((form) => form.name === formName);
+    let form = this.formsConfig.forms.filter((form) => form.name === formName);
     if (form.length > 0) {
       return form[0];
     } else {
@@ -232,7 +232,7 @@ class EmFormsCore {
 
   toModel = () => {
     let modelToUpdate = {};
-    this.formsGroup.forms.map((item, index) => {
+    this.formsConfig.forms.map((item, index) => {
       modelToUpdate[item.name] = item.value;
     });
     return modelToUpdate;
@@ -295,15 +295,15 @@ class EmFormsCore {
   };
 
   setMode = (mode) => {
-    this.formsGroup.forms.map((form) => {
+    this.formsConfig.forms.map((form) => {
       form.mode = mode;
     });
     this.updateParentState();
   };
 
   updateParentState = () => {
-    if (this.formsGroup.handleStateUpdate != undefined) {
-      this.formsGroup.handleStateUpdate();
+    if (this.formsConfig.handleStateUpdate != undefined) {
+      this.formsConfig.handleStateUpdate();
     }
   };
 
@@ -315,14 +315,14 @@ class EmFormsCore {
   };
 
   setDefaultValues = () => {
-    this.formsGroup.forms.map((form) => {
+    this.formsConfig.forms.map((form) => {
       form.touched = false;
       form.defaultValue = form.value;
     });
   };
 
   setDefaultTouch = () => {
-    this.formsGroup.forms.map((form) => {
+    this.formsConfig.forms.map((form) => {
       form.touched = false;
     });
   };
