@@ -90,4 +90,12 @@ function range(form, emForms, param) {
   return isValid;
 }
 
-export { required, maxLength, minLength, pattern, email, requiredIf, compare, range };
+function number(form, emForms, param) {
+  let isValid = true;
+  if (form.value !== undefined && form.value !== "" && form.value !== null) {
+    isValid = !isNaN(form.value);
+  }
+  return isValid;
+}
+
+export { required, maxLength, minLength, pattern, email, requiredIf, compare, range, number };

@@ -24,6 +24,10 @@ class EmFormsCore {
   //   this.formsConfig = formsObj;
   // }
 
+  addForm = (formObject) => {
+    this.formsConfig.forms.push(formObject);
+  };
+
   isValid = () => {
     let isValid = true;
     this.formsConfig.forms.map((form) => {

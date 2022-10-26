@@ -72,6 +72,7 @@ declare module "@enfometa/em-forms" {
 
   interface EmFormsCore {
     new (emForms: EmFormsObj);
+    addForm(formObject: EmForm): void;
     isValid(): boolean;
     isValidForm(formName: string): boolean;
     isValidFormValidator(formName: string, validatorName: string): boolean;
@@ -111,4 +112,5 @@ declare module "@enfometa/em-forms" {
   export function requiredIf(form: EmForm, emForms: EmFormsObj, param: any): boolean;
   export function compare(form: EmForm, emForms: EmFormsObj, param: any): boolean;
   export function range(form: EmForm, emForms: EmFormsObj, param: any): boolean;
+  export function number(form: EmForm, emForms: EmFormsObj, param: any): boolean;
 }
