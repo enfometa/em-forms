@@ -162,11 +162,13 @@ class EmFormsCore {
         form.value = null;
         if (form.defaultValue !== undefined) {
           form.value = form.defaultValue;
+          this.triggerOnChange(form);
         }
         if (values != undefined && values != null) {
           let forms = values.filter((f) => f.name == formName);
           if (forms.length > 0) {
             form.value = forms[0].value;
+            this.triggerOnChange(form);
           }
         }
       }
@@ -185,6 +187,7 @@ class EmFormsCore {
     let form = this.getForm(formName);
     if (form !== undefined && form !== null) {
       form.value = value;
+      this.triggerOnChange(form);
       if (!isNullOrUndefined(this.model)) {
         if (this.model[formName] !== undefined || this.allowAddProps) {
           this.model[formName] = value;
@@ -259,6 +262,7 @@ class EmFormsCore {
         let form = this.getForm(value.name);
         if (form !== null) {
           form.value = value.value;
+          this.triggerOnChange(form);
         }
       });
     }
@@ -329,6 +333,15 @@ class EmFormsCore {
     this.formsConfig.forms.map((form) => {
       form.touched = false;
     });
+  };
+
+  triggerOnChange = (form) => {
+    if (!isNullOrUndefined(form.onChange)) {
+      form.onChange(form.value);
+    }
+    if (!isNullOrUndefined(this.formsConfig.onChange)) {
+      this.formsConfig.onChange(form.name, form.value);
+    }
   };
 }
 

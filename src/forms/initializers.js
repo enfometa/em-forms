@@ -8,15 +8,10 @@ function useEmForms(formsObj) {
   const emFormsRef = useRef();
   useState(() => {
     emFormsRef.current = new EmFormsCore({
-      forms: forms.forms,
+      ...forms,
       handleStateUpdate: () => {
         setForms({ ...forms });
-        // if (!emFormsRef.current == undefined) {
-        //   emFormsRef.current.setFormsObj(forms);
-        //   console.log("emFormsRef.current condition", emFormsRef.current);
-        // }
       },
-      config: forms.config,
     });
   }, []);
 
@@ -31,11 +26,10 @@ const initEmForms = (formsObj, component, stateKey) => {
   component.state[stateKey] = formsObj;
 
   const emForms = new EmFormsCore({
-    forms: formsObj.forms,
+    ...formsObj,
     handleStateUpdate: () => {
       component.setState({ [stateKey]: { ...component.state[stateKey] } });
     },
-    config: formsObj.config,
   });
   return emForms;
 };

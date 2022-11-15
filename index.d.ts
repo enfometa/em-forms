@@ -27,9 +27,11 @@ declare module "@enfometa/em-forms" {
     name: string;
     value: any;
     validators: Validator[];
+    onChange?: (value: any) => void;
   }
   interface EmFormsObj {
     forms: EmForm[];
+    onChange?: (formName: string, value: any) => void;
     handleStateUpdate: () => void;
     config?: EmFormsConfig;
   }
