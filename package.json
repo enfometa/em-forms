@@ -2,8 +2,10 @@
   "name": "@enfometa/em-forms",
   "description": "A simple react library for forms validation",
   "homepage": "https://www.enfometa.com/documentation",
+  "license": "MIT",
+  "author": "enfometa <enfometa@gmail.com> (https://www.enfometa.com/)",
   "main": "dist/index.js",
-  "version": "1.0.16",
+  "version": "1.0.17",
   "private": false,
   "keywords": [
     "react",
