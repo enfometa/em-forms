@@ -259,11 +259,7 @@ class EmFormsCore {
   setValues = (values, setDefaults = true) => {
     if (values !== undefined && values !== null) {
       values.map((value) => {
-        let form = this.getForm(value.name);
-        if (form !== null) {
-          form.value = value.value;
-          this.triggerOnChange(form);
-        }
+        this.setFormValue(value.name, value.value)
       });
     }
     if (setDefaults) {
