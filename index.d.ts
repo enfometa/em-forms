@@ -15,7 +15,7 @@ declare module "@enfometa/em-forms" {
     bindValue: boolean;
     valuePropName: string;
     onChangePropName: string;
-    elements: [];
+    elements: EmFormConfigElement[];
   }
 
   interface EmFormsGlobalConfig {
