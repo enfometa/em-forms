@@ -1,11 +1,21 @@
 import React from "react";
 
 declare module "@enfometa/em-forms" {
+  interface EmFormConfigElementProp {
+    name: string;
+    value: string;
+  }
+
+  interface EmFormConfigElement {
+    type: string;
+    props: EmFormConfigElementProp[];
+  }
   interface EmFormConfig {
     valueFunc: (e: UIEvent) => void;
-    bindValue: boolean = true;
-    valuePropName: string = "value";
-    onChangePropName: string = "onChange";
+    bindValue: boolean;
+    valuePropName: string;
+    onChangePropName: string;
+    elements: [];
   }
 
   interface EmFormsGlobalConfig {
@@ -47,8 +57,8 @@ declare module "@enfometa/em-forms" {
   }
 
   interface EmFormsTriggersCofig {
-    touch: boolean = true;
-    change: boolean = true;
+    touch: boolean;
+    change: boolean;
   }
 
   interface EmFormsConfig {
@@ -61,7 +71,7 @@ declare module "@enfometa/em-forms" {
 
   interface EmFormProps extends EmFormGroupProps {
     formName: string;
-    bindValue: boolean = true;
+    bindValue: boolean;
     valuePropName: string;
     onChangePropName: string;
     valueFunc: () => any;
@@ -69,7 +79,7 @@ declare module "@enfometa/em-forms" {
 
   interface EmFormErrorProps extends EmFormGroupProps {
     formName: string;
-    validatorName: string = null;
+    validatorName: string;
   }
 
   interface EmFormsCore {
@@ -80,7 +90,7 @@ declare module "@enfometa/em-forms" {
     isValidFormValidator(formName: string, validatorName: string): boolean;
     getFormErrors(formName: string): FormError[];
     getFormError(formName: string, validatorName: string): FormError | null;
-    getFormErrorMessage(formName: string, validatorName: string = null): string | null;
+    getFormErrorMessage(formName: string, validatorName: string): string | null;
     getErrors(): FormError[];
     validate(): boolean;
     validateForm(formName: string): boolean;
@@ -93,9 +103,9 @@ declare module "@enfometa/em-forms" {
     getFormValue(formName: string): any;
     getFormTouch(formName: string): boolean;
     toModel(): any;
-    setValuesFromModel(obj: any, setDefaults: boolean = true): void;
-    setValues(values: EmForm[], setDefaults: boolean = true): void;
-    setModel(model: any, allowAddProps: boolean = false): void;
+    setValuesFromModel(obj: any, setDefaults: boolean): void;
+    setValues(values: EmForm[], setDefaults: boolean): void;
+    setModel(model: any, allowAddProps: boolean): void;
   }
 
   export function useEmForms(emForms: EmFormsObj): EmFormsCore;
