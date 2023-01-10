@@ -69,6 +69,8 @@ const getMostSpecificConfig = (element, elementRegister) => {
 
   selectedConfigs.sort(comapreFunc);
 
+  console.log(selectedConfig);
+
   let selectedConfig = null;
   //if element config found on register
   let highestPropMapped = 0;
