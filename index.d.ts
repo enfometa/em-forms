@@ -1,14 +1,9 @@
 import React from "react";
 
 declare module "@enfometa/em-forms" {
-  interface EmFormConfigElementProp {
-    name: string;
-    value: string;
-  }
-
   interface EmFormConfigElement {
     type: string;
-    props: EmFormConfigElementProp[];
+    props: any;
   }
   interface EmFormConfig {
     valueFunc: (e: UIEvent) => void;

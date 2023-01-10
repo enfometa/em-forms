@@ -37,20 +37,6 @@ const mergeDeep = (target, ...sources) => {
   return mergeDeep(target, ...sources);
 };
 
-const comapreFunc = (a, b) => {
-  let aPropsCount = 0;
-  let bPropsCount = 0;
-
-  if (!isNullOrUndefined(a.element.props)) {
-    aPropsCount = a.element.props.length;
-  }
-  if (!isNullOrUndefined(b.element.props)) {
-    bPropsCount = b.element.props.length;
-  }
-
-  return aPropsCount - bPropsCount;
-};
-
 const getMostSpecificConfig = (element, elementRegister) => {
   const eleName = typeof element.type == "string" ? element.type : element.type.name;
   const eleProps = element.props;
@@ -60,43 +46,41 @@ const getMostSpecificConfig = (element, elementRegister) => {
   elementRegister.forEach((er) => {
     if (!isNullOrUndefined(er.elements)) {
       er.elements.forEach((e) => {
+        let erEleMatched = true;
         if (e.type === eleName) {
-          selectedConfigs.push({ ...er, element: e, elements: undefined });
+          //if config has props
+          if (!isNullOrUndefined(e.props)) {
+            //make sure each prop exists on the element
+            Object.keys(e.props).forEach((p) => {
+              if (!eleProps.hasOwnProperty(p) || eleProps[p] !== e.props[p]) {
+                erEleMatched = false;
+              }
+            });
+          }
+          if (erEleMatched) {
+            selectedConfigs.push({ ...er, element: e, elements: undefined });
+          }
         }
       });
     }
   });
 
-  selectedConfigs.sort(comapreFunc);
-
-  console.log(selectedConfig);
-
   let selectedConfig = null;
-  //if element config found on register
   let highestPropMapped = 0;
   if (selectedConfigs.length > 0) {
-    selectedConfigs.forEach((eleConfig) => {
-      let propsMapped = 0;
-      //type mapped
-      propsMapped++;
-      if (!isNullOrUndefined(eleConfig.element.props)) {
-        eleConfig.element.props.forEach((pc) => {
-          //if property exists
-          if (isNullOrUndefined(pc.value)) {
-            if (eleProps.hasOwnProperty(pc.name)) {
-              propsMapped++;
-            }
-          } else {
-            //if property exists and value also mapped
-            if (eleProps.hasOwnProperty(pc.name) && eleProps[pc.name] === pc.value) {
-              propsMapped++;
-            }
-          }
-        });
+    selectedConfigs.forEach((erConfig) => {
+      //tag name/type mapped
+      let countPropsMapped = 1;
+
+      //find out the max props matched
+      if (!isNullOrUndefined(erConfig.element.props)) {
+        const erPropsMappedLength = Object.keys(erConfig.element.props).length;
+        countPropsMapped += erPropsMappedLength;
       }
-      if (propsMapped > highestPropMapped) {
-        selectedConfig = eleConfig;
-        highestPropMapped = propsMapped;
+
+      if (countPropsMapped > highestPropMapped) {
+        selectedConfig = erConfig;
+        highestPropMapped = countPropsMapped;
       }
     });
   }
