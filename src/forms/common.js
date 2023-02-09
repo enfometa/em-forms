@@ -10,6 +10,20 @@ const isNullOrUndefined = (obj) => {
   return obj == null || obj == undefined;
 };
 
+const isNullEmptyOrWhiteSpace = (obj, trim) => {
+  let isNullUndefinedWhiteSpace = isNullOrUndefined(obj);
+  if(!isNullUndefinedWhiteSpace){
+    let tempValue = obj.toString();
+    if(trim){
+      tempValue = tempValue.trim();
+    }
+    if(tempValue === ''){
+      isNullUndefinedWhiteSpace = true;
+    }
+  }
+  return isNullUndefinedWhiteSpace;
+};
+
 const isObject = (item) => {
   return item && typeof item === "object" && !Array.isArray(item);
 };
@@ -88,4 +102,4 @@ const getMostSpecificConfig = (element, elementRegister) => {
   return selectedConfig;
 };
 
-export { isNullOrUndefined, mergeDeep, isObject, emFormsGlobalConfig, FormGroupContext, getMostSpecificConfig };
+export { isNullOrUndefined, mergeDeep, isObject, emFormsGlobalConfig, FormGroupContext, getMostSpecificConfig, isNullEmptyOrWhiteSpace };

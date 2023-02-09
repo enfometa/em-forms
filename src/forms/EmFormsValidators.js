@@ -1,10 +1,17 @@
+import { isNullEmptyOrWhiteSpace } from "./common";
+
 function required(form, emForms, param) {
   let isValid = true;
+  let acceptsWhiteSpace = false;
   let initValue = null;
   if (param !== undefined) {
     initValue = param.initialValue;
+    if(param.acceptsWhiteSpace){
+      acceptsWhiteSpace = param.acceptsWhiteSpace;
+    }
   }
-  if (form.value === undefined || form.value === "" || form.value === null || (initValue !== null && initValue === form.value)) {
+
+  if (isNullEmptyOrWhiteSpace(form.value, !acceptsWhiteSpace) || (initValue !== null && initValue === form.value)) {
     isValid = false;
   }
   return isValid;
@@ -56,10 +63,17 @@ function email(form, emForms, param) {
 
 function requiredIf(form, emForms, param) {
   let isValid = true;
+  let acceptsWhiteSpace = false;
   let formCompareValue = emForms.getFormValue(param.name);
 
+  if (param !== undefined) {
+    if(param.acceptsWhiteSpace){
+      acceptsWhiteSpace = param.acceptsWhiteSpace;
+    }
+  }
+
   if (formCompareValue == param.value) {
-    if (form.value === undefined || form.value === null || form.value === "") {
+    if (isNullEmptyOrWhiteSpace(form.value, !acceptsWhiteSpace)) {
       isValid = false;
     }
   }
