@@ -10,10 +10,11 @@ class EmFormsGlobalConfig {
       valuePropName: "value",
       onChangePropName: "onChange",
       elementRegister: [],
+      valueConverter: null
     };
   }
 
-  static setConfigValues = (config, bindValue, valuePropName, onChangePropName, valueFunc) => {
+  static setConfigValues = (config, bindValue, valuePropName, onChangePropName, valueFunc, valueConverter) => {
     if (isNullOrUndefined(config.bindValue)) {
       config.bindValue = bindValue;
     }
@@ -25,6 +26,9 @@ class EmFormsGlobalConfig {
     }
     if (isNullOrUndefined(config.valueFunc)) {
       config.valueFunc = valueFunc;
+    }
+    if (isNullOrUndefined(config.valueConverter)) {
+      config.valueConverter = valueConverter;
     }
   };
 
@@ -45,6 +49,7 @@ class EmFormsGlobalConfig {
     this.emForm.valuePropName = defaultConfig.valuePropName;
     this.emForm.onChangePropName = defaultConfig.onChangePropName;
     this.emForm.valueFunc = defaultConfig.valueFunc;
+    this.emForm.valueConverter = defaultConfig.valueConverter;
   };
 }
 

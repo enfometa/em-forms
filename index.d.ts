@@ -11,6 +11,7 @@ declare module "@enfometa/em-forms" {
     valuePropName: string;
     onChangePropName: string;
     elements: EmFormConfigElement[];
+    valueConverter: (value : any) => any
   }
 
   interface EmFormsGlobalConfig {
@@ -70,6 +71,7 @@ declare module "@enfometa/em-forms" {
     valuePropName: string;
     onChangePropName: string;
     valueFunc: () => any;
+    valueConverter: (value : any) => any
   }
 
   interface EmFormErrorProps extends EmFormGroupProps {

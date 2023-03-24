@@ -4,7 +4,7 @@ import { FormGroupContext } from "./common";
 import { emFormsGlobalConfig } from "./common";
 import EmFormsGlobalConfig from "./EmFormsGlobalConfig";
 
-function EmForm({ children, emForms, formName, bindValue, valuePropName, onChangePropName, valueFunc }) {
+function EmForm({ children, emForms, formName, bindValue, valuePropName, onChangePropName, valueFunc, valueConverter }) {
   const [childElement] = Array.isArray(children) ? children : [children];
 
   const finalConfig = {};
@@ -19,13 +19,14 @@ function EmForm({ children, emForms, formName, bindValue, valuePropName, onChang
         registerConfig.bindValue,
         registerConfig.valuePropName,
         registerConfig.onChangePropName,
-        registerConfig.valueFunc
+        registerConfig.valueFunc,
+        registerConfig.valueConverter
       );
     }
   };
 
   //first assgin props values, priority = 1
-  EmFormsGlobalConfig.setConfigValues(finalConfig, bindValue, valuePropName, onChangePropName, valueFunc);
+  EmFormsGlobalConfig.setConfigValues(finalConfig, bindValue, valuePropName, onChangePropName, valueFunc, valueConverter);
 
   //search element in from register, priority = 2
   setEmFormValuesFromRegister();
@@ -36,7 +37,8 @@ function EmForm({ children, emForms, formName, bindValue, valuePropName, onChang
     emFormsGlobalConfig.emForm.bindValue,
     emFormsGlobalConfig.emForm.valuePropName,
     emFormsGlobalConfig.emForm.onChangePropName,
-    emFormsGlobalConfig.emForm.valueFunc
+    emFormsGlobalConfig.emForm.valueFunc,
+    emFormsGlobalConfig.emForm.valueConverter
   );
 
   const formGroupContext = useContext(FormGroupContext);
@@ -74,7 +76,11 @@ function EmForm({ children, emForms, formName, bindValue, valuePropName, onChang
 
   let newProps = { [finalConfig.onChangePropName]: (e) => onChangeCallback(e), onBlur: (e) => onBlurCallback(e) };
   if (finalConfig.bindValue) {
-    newProps[finalConfig.valuePropName] = emFormsObj.getFormValue(formName);
+    let val = emFormsObj.getFormValue(formName);
+    if(finalConfig.valueConverter){
+      val = finalConfig.valueConverter(val);
+    }
+    newProps[finalConfig.valuePropName] = val;
   }
 
   return <React.Fragment>{!isNullOrUndefined(childElement) && React.cloneElement(childElement, newProps)}</React.Fragment>;
