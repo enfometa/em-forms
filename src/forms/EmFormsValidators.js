@@ -1,6 +1,6 @@
 import { isNullEmptyOrWhiteSpace } from "./common";
 
-function required(form, emForms, param) {
+function required(formControl, emForms, param) {
   let isValid = true;
   let acceptsWhiteSpace = false;
   let initValue = null;
@@ -11,17 +11,17 @@ function required(form, emForms, param) {
     }
   }
 
-  if (isNullEmptyOrWhiteSpace(form.value, !acceptsWhiteSpace) || (initValue !== null && initValue === form.value)) {
+  if (isNullEmptyOrWhiteSpace(formControl.value, !acceptsWhiteSpace) || (initValue !== null && initValue === formControl.value)) {
     isValid = false;
   }
   return isValid;
 }
 
-function maxLength(form, emForms, param) {
+function maxLength(formControl, emForms, param) {
   let isValid = true;
-  if (form.value !== undefined && form.value !== "" && form.value !== null) {
+  if (formControl.value !== undefined && formControl.value !== "" && formControl.value !== null) {
     if (param !== undefined && param.maxLength !== undefined) {
-      let valLength = form.value.toString().length;
+      let valLength = formControl.value.toString().length;
       if (valLength > param.maxLength) {
         isValid = false;
       }
@@ -30,11 +30,11 @@ function maxLength(form, emForms, param) {
   return isValid;
 }
 
-function minLength(form, emForms, param) {
+function minLength(formControl, emForms, param) {
   let isValid = true;
-  if (form.value !== undefined && form.value !== "" && form.value !== null) {
+  if (formControl.value !== undefined && formControl.value !== "" && formControl.value !== null) {
     if (param !== undefined && param.minLength !== undefined) {
-      let valLength = form.value.toString().length;
+      let valLength = formControl.value.toString().length;
       if (valLength < param.minLength) {
         isValid = false;
       }
@@ -43,25 +43,25 @@ function minLength(form, emForms, param) {
   return isValid;
 }
 
-function pattern(form, emForms, param) {
+function pattern(formControl, emForms, param) {
   let isValid = true;
-  if (form.value !== undefined && form.value !== "" && form.value !== null) {
+  if (formControl.value !== undefined && formControl.value !== "" && formControl.value !== null) {
     if (param !== undefined && param.pattern !== undefined) {
       let regEx = new RegExp(param.pattern, "g");
-      let value = form.value.toString();
+      let value = formControl.value.toString();
       isValid = regEx.test(value);
     }
   }
   return isValid;
 }
 
-function email(form, emForms, param) {
+function email(formControl, emForms, param) {
   let isValid = true;
-  isValid = pattern(form, emForms, { pattern: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/ });
+  isValid = pattern(formControl, emForms, { pattern: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/ });
   return isValid;
 }
 
-function requiredIf(form, emForms, param) {
+function requiredIf(formControl, emForms, param) {
   let isValid = true;
   let acceptsWhiteSpace = false;
   let formCompareValue = emForms.getFormValue(param.name);
@@ -73,29 +73,29 @@ function requiredIf(form, emForms, param) {
   }
 
   if (formCompareValue == param.value) {
-    if (isNullEmptyOrWhiteSpace(form.value, !acceptsWhiteSpace)) {
+    if (isNullEmptyOrWhiteSpace(formControl.value, !acceptsWhiteSpace)) {
       isValid = false;
     }
   }
   return isValid;
 }
 
-function compare(form, emForms, param) {
+function compare(formControl, emForms, param) {
   let isValid = true;
   let formCompareValue = emForms.getFormValue(param.compareTo);
-  if (!(form.value === undefined || form.value === null || form.value === "")) {
-    if (formCompareValue !== form.value) {
+  if (!(formControl.value === undefined || formControl.value === null || formControl.value === "")) {
+    if (formCompareValue !== formControl.value) {
       isValid = false;
     }
   }
   return isValid;
 }
 
-function range(form, emForms, param) {
+function range(formControl, emForms, param) {
   let isValid = true;
-  if (form.value !== undefined && form.value !== "" && form.value !== null) {
+  if (formControl.value !== undefined && formControl.value !== "" && formControl.value !== null) {
     if (param !== undefined && param.min !== undefined && param.max !== undefined) {
-      let formValue = parseFloat(form.value);
+      let formValue = parseFloat(formControl.value);
       if (formValue > param.max || formValue < param.min) {
         isValid = false;
       }
@@ -104,10 +104,10 @@ function range(form, emForms, param) {
   return isValid;
 }
 
-function number(form, emForms, param) {
+function number(formControl, emForms, param) {
   let isValid = true;
-  if (form.value !== undefined && form.value !== "" && form.value !== null) {
-    isValid = !isNaN(form.value);
+  if (formControl.value !== undefined && formControl.value !== "" && formControl.value !== null) {
+    isValid = !isNaN(formControl.value);
   }
   return isValid;
 }

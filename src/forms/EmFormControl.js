@@ -4,7 +4,7 @@ import { FormGroupContext } from "./common";
 import { emFormsGlobalConfig } from "./common";
 import EmFormsGlobalConfig from "./EmFormsGlobalConfig";
 
-function EmForm({ children, emForms, formName, bindValue, valuePropName, onChangePropName, valueFunc, valueConverter }) {
+function EmFormControl({ children, emForms, formName, bindValue, valuePropName, onChangePropName, valueFunc, valueConverter }) {
   const [childElement] = Array.isArray(children) ? children : [children];
 
   const finalConfig = {};
@@ -86,4 +86,4 @@ function EmForm({ children, emForms, formName, bindValue, valuePropName, onChang
   return <React.Fragment>{!isNullOrUndefined(childElement) && React.cloneElement(childElement, newProps)}</React.Fragment>;
 }
 
-export default EmForm;
+export default EmFormControl;

@@ -2,14 +2,14 @@ import { isNullOrUndefined } from "./common";
 
 class EmFormsGlobalConfig {
   constructor() {
-    this.emForm = {
+    this.emFormConfig = {
       valueFunc: (e) => {
         return e.target.value;
       },
       bindValue: true,
       valuePropName: "value",
       onChangePropName: "onChange",
-      elementRegister: [],
+      controlsRegister: [],
       valueConverter: null
     };
   }
@@ -32,24 +32,24 @@ class EmFormsGlobalConfig {
     }
   };
 
-  registerEmFormElements = (configArray) => {
+  registerEmFormControls = (configArray) => {
     if (!isNullOrUndefined(configArray)) {
       configArray.forEach((item) => {
-        this.emForm.elementRegister.push(item);
+        this.emFormConfig.controlsRegister.push(item);
       });
     }
   };
 
-  getEmFormElementsRegister = () => {
-    return this.emForm.elementRegister;
+  getEmFormControlsRegister = () => {
+    return this.emFormConfig.controlsRegister;
   };
 
   setEmFormGlobalConfig = (defaultConfig) => {
-    this.emForm.bindValue = defaultConfig.bindValue;
-    this.emForm.valuePropName = defaultConfig.valuePropName;
-    this.emForm.onChangePropName = defaultConfig.onChangePropName;
-    this.emForm.valueFunc = defaultConfig.valueFunc;
-    this.emForm.valueConverter = defaultConfig.valueConverter;
+    this.emFormConfig.bindValue = defaultConfig.bindValue;
+    this.emFormConfig.valuePropName = defaultConfig.valuePropName;
+    this.emFormConfig.onChangePropName = defaultConfig.onChangePropName;
+    this.emFormConfig.valueFunc = defaultConfig.valueFunc;
+    this.emFormConfig.valueConverter = defaultConfig.valueConverter;
   };
 }
 

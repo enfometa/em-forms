@@ -1,6 +1,6 @@
 import EmFormsCore from "./src/forms/EmFormsCore";
 import { useEmForms, initEmForms } from "./src/forms/initializers";
-import EmForm from "./src/forms/EmForm";
+import EmFormControl from "./src/forms/EmFormControl";
 import EmFormGroup from "./src/forms/EmFormGroup";
 import EmFormError from "./src/forms/EmFormError";
 import EmFormErrorMessage from "./src/forms/EmFormErrorMessage";
@@ -20,7 +20,7 @@ export {
   compare,
   range,
   number,
-  EmForm,
+  EmFormControl,
   EmFormGroup,
   EmFormError,
   EmFormErrorMessage,

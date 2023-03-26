@@ -1,7 +1,7 @@
 import React from "react";
 
 declare module "@enfometa/em-forms" {
-  interface EmFormConfigElement {
+  interface EmFormConfigControl {
     type: string;
     props: any;
   }
@@ -10,14 +10,14 @@ declare module "@enfometa/em-forms" {
     bindValue: boolean;
     valuePropName: string;
     onChangePropName: string;
-    elements: EmFormConfigElement[];
+    controls: EmFormConfigControl[];
     valueConverter: (value : any) => any
   }
 
   interface EmFormsGlobalConfig {
-    emForm: EmFormConfig;
-    registerEmFormElements(configArray: EmFormConfig[]): void;
-    getEmFormElementsRegister(): EmFormConfig[];
+    emFormConfig: EmFormConfig;
+    registerEmFormControls(configArray: EmFormConfig[]): void;
+    getEmFormControlsRegister(): EmFormConfig[];
     setEmFormGlobalConfig(defaultConfig: EmFormConfig): void;
   }
 
@@ -25,18 +25,25 @@ declare module "@enfometa/em-forms" {
 
   interface Validator {
     name: string;
-    func: (form: EmForm, emForm: EmFormsObj, param: any) => boolean;
+    func: (form: EmFormControl, emForms: EmFormsObj, param: any) => boolean;
     message: string;
     param?: any;
   }
-  interface EmForm {
+
+  interface EmFormControl {
     name: string;
     value: any;
     validators: Validator[];
     onChange?: (value: any) => void;
   }
+
+  interface KeyValue {
+    name: string;
+    value: any;
+  }
+
   interface EmFormsObj {
-    forms: EmForm[];
+    forms: EmFormControl[];
     onChange?: (formName: string, value: any) => void;
     handleStateUpdate: () => void;
     config?: EmFormsConfig;
@@ -81,7 +88,7 @@ declare module "@enfometa/em-forms" {
 
   interface EmFormsCore {
     new (emForms: EmFormsObj);
-    addForm(formObject: EmForm): void;
+    addForm(formControl: EmFormControl): void;
     isValid(): boolean;
     isValidForm(formName: string): boolean;
     isValidFormValidator(formName: string, validatorName: string): boolean;
@@ -96,12 +103,12 @@ declare module "@enfometa/em-forms" {
     setFormValue(formName: string, value: any): void;
     setFormTouch(formName: string, touched: boolean): void;
     setTouch(touched: boolean): void;
-    getForm(formName: string): EmForm;
+    getForm(formName: string): EmFormControl;
     getFormValue(formName: string): any;
     getFormTouch(formName: string): boolean;
     toModel(): any;
     setValuesFromModel(obj: any, setDefaults: boolean): void;
-    setValues(values: EmForm[], setDefaults: boolean): void;
+    setValues(values: KeyValue[], setDefaults: boolean): void;
     setModel(model: any, allowAddProps: boolean): void;
   }
 
@@ -109,17 +116,17 @@ declare module "@enfometa/em-forms" {
   export function initEmForms(emForms: EmFormsObj, component: React.Component, stateKey: string): EmFormsCore;
 
   export function EmFormGroup(props: EmFormGroupProps): React.FC;
-  export function EmForm(props: EmFormProps): React.FC;
+  export function EmFormControl(props: EmFormProps): React.FC;
   export function EmFormError(props: EmFormErrorProps): React.FC;
   export function EmFormErrorMessage(props: EmFormErrorProps): React.FC;
 
-  export function required(form: EmForm, emForms: EmFormsObj, param: any): boolean;
-  export function maxLength(form: EmForm, emForms: EmFormsObj, param: any): boolean;
-  export function minLength(form: EmForm, emForms: EmFormsObj, param: any): boolean;
-  export function pattern(form: EmForm, emForms: EmFormsObj, param: any): boolean;
-  export function email(form: EmForm, emForms: EmFormsObj, param: any): boolean;
-  export function requiredIf(form: EmForm, emForms: EmFormsObj, param: any): boolean;
-  export function compare(form: EmForm, emForms: EmFormsObj, param: any): boolean;
-  export function range(form: EmForm, emForms: EmFormsObj, param: any): boolean;
-  export function number(form: EmForm, emForms: EmFormsObj, param: any): boolean;
+  export function required(formControl: EmFormControl, emForms: EmFormsObj, param: any): boolean;
+  export function maxLength(formControl: EmFormControl, emForms: EmFormsObj, param: any): boolean;
+  export function minLength(formControl: EmFormControl, emForms: EmFormsObj, param: any): boolean;
+  export function pattern(formControl: EmFormControl, emForms: EmFormsObj, param: any): boolean;
+  export function email(formControl: EmFormControl, emForms: EmFormsObj, param: any): boolean;
+  export function requiredIf(formControl: EmFormControl, emForms: EmFormsObj, param: any): boolean;
+  export function compare(formControl: EmFormControl, emForms: EmFormsObj, param: any): boolean;
+  export function range(formControl: EmFormControl, emForms: EmFormsObj, param: any): boolean;
+  export function number(formControl: EmFormControl, emForms: EmFormsObj, param: any): boolean;
 }
