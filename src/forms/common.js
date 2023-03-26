@@ -51,13 +51,13 @@ const mergeDeep = (target, ...sources) => {
   return mergeDeep(target, ...sources);
 };
 
-const getMostSpecificConfig = (control, elementRegister) => {
+const getMostSpecificConfig = (control, controlsRegister) => {
   const eleName = typeof control.type == "string" ? control.type : control.type.name;
   const eleProps = control.props;
   const selectedConfigs = [];
 
   //find by control type and make control field as linear to sort easily by number of props
-  elementRegister.forEach((er) => {
+  controlsRegister.forEach((er) => {
     if (!isNullOrUndefined(er.controls)) {
       er.controls.forEach((e) => {
         let erEleMatched = true;

@@ -10,8 +10,8 @@ function EmFormControl({ children, emForms, formName, bindValue, valuePropName, 
   const finalConfig = {};
 
   const setEmFormValuesFromRegister = () => {
-    //find element in the element register
-    const registerConfig = getMostSpecificConfig(childElement, emFormsGlobalConfig.emForm.elementRegister);
+    //find controls in the element register
+    const registerConfig = getMostSpecificConfig(childElement, emFormsGlobalConfig.emForm.controlsRegister);
 
     if (!isNullOrUndefined(registerConfig)) {
       EmFormsGlobalConfig.setConfigValues(
@@ -28,7 +28,7 @@ function EmFormControl({ children, emForms, formName, bindValue, valuePropName, 
   //first assgin props values, priority = 1
   EmFormsGlobalConfig.setConfigValues(finalConfig, bindValue, valuePropName, onChangePropName, valueFunc, valueConverter);
 
-  //search element in from register, priority = 2
+  //search controls in from register, priority = 2
   setEmFormValuesFromRegister();
 
   //assign from global config values, , priority = 3
