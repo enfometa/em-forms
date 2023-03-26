@@ -51,20 +51,20 @@ const mergeDeep = (target, ...sources) => {
   return mergeDeep(target, ...sources);
 };
 
-const getMostSpecificConfig = (element, elementRegister) => {
-  const eleName = typeof element.type == "string" ? element.type : element.type.name;
-  const eleProps = element.props;
+const getMostSpecificConfig = (control, elementRegister) => {
+  const eleName = typeof control.type == "string" ? control.type : control.type.name;
+  const eleProps = control.props;
   const selectedConfigs = [];
 
-  //find by element type and make element field as linear to sort easily by number of props
+  //find by control type and make control field as linear to sort easily by number of props
   elementRegister.forEach((er) => {
-    if (!isNullOrUndefined(er.elements)) {
-      er.elements.forEach((e) => {
+    if (!isNullOrUndefined(er.controls)) {
+      er.controls.forEach((e) => {
         let erEleMatched = true;
         if (e.type === eleName) {
           //if config has props
           if (!isNullOrUndefined(e.props)) {
-            //make sure each prop exists on the element
+            //make sure each prop exists on the control
             Object.keys(e.props).forEach((p) => {
               if (!eleProps.hasOwnProperty(p) || eleProps[p] !== e.props[p]) {
                 erEleMatched = false;
@@ -72,7 +72,7 @@ const getMostSpecificConfig = (element, elementRegister) => {
             });
           }
           if (erEleMatched) {
-            selectedConfigs.push({ ...er, element: e, elements: undefined });
+            selectedConfigs.push({ ...er, control: e, controls: undefined });
           }
         }
       });
@@ -87,8 +87,8 @@ const getMostSpecificConfig = (element, elementRegister) => {
       let countPropsMapped = 1;
 
       //find out the max props matched
-      if (!isNullOrUndefined(erConfig.element.props)) {
-        const erPropsMappedLength = Object.keys(erConfig.element.props).length;
+      if (!isNullOrUndefined(erConfig.control.props)) {
+        const erPropsMappedLength = Object.keys(erConfig.control.props).length;
         countPropsMapped += erPropsMappedLength;
       }
 
