@@ -16,7 +16,7 @@ A simple, robust and flexible react forms validation library for both React Js a
 ## Create forms object
 
 ```
-import { useEmForms, required, email, EmFormErrorMessage, EmFormGroup, EmForm } from "@enfometa/em-forms";
+import { useEmForms, required, email, EmFormErrorMessage, EmFormGroup, EmFormControl } from "@enfometa/em-forms";
 
 const forms = useEmForms({
     forms: [
@@ -49,9 +49,9 @@ const forms = useEmForms({
 ```
   <EmFormGroup emForms={forms}>
     <div>
-        <EmForm formName="username">
+        <EmFormControl formName="username">
             <input type="email" className="form-control" placeholder="Email" />
-        </EmForm>
+        </EmFormControl>
 
         <div className="error-message">
             <EmFormErrorMessage formName="username" validatorName="required" />
@@ -59,9 +59,9 @@ const forms = useEmForms({
         </div>
     </div>
     <div>
-        <EmForm formName="password">
+        <EmFormControl formName="password">
             <input type="password" className="form-control" placeholder="password" />
-        </EmForm>
+        </EmFormControl>
 
         <div className="error-message">
             <EmFormErrorMessage formName="password" validatorName="required" />
