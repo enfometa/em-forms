@@ -11,7 +11,7 @@ function EmFormControl({ children, emForms, formName, bindValue, valuePropName, 
 
   const setEmFormValuesFromRegister = () => {
     //find controls in the element register
-    const registerConfig = getMostSpecificConfig(childElement, emFormsGlobalConfig.emForm.controlsRegister);
+    const registerConfig = getMostSpecificConfig(childElement, emFormsGlobalConfig.emFormConfig.controlsRegister);
 
     if (!isNullOrUndefined(registerConfig)) {
       EmFormsGlobalConfig.setConfigValues(
@@ -34,11 +34,11 @@ function EmFormControl({ children, emForms, formName, bindValue, valuePropName, 
   //assign from global config values, , priority = 3
   EmFormsGlobalConfig.setConfigValues(
     finalConfig,
-    emFormsGlobalConfig.emForm.bindValue,
-    emFormsGlobalConfig.emForm.valuePropName,
-    emFormsGlobalConfig.emForm.onChangePropName,
-    emFormsGlobalConfig.emForm.valueFunc,
-    emFormsGlobalConfig.emForm.valueConverter
+    emFormsGlobalConfig.emFormConfig.bindValue,
+    emFormsGlobalConfig.emFormConfig.valuePropName,
+    emFormsGlobalConfig.emFormConfig.onChangePropName,
+    emFormsGlobalConfig.emFormConfig.valueFunc,
+    emFormsGlobalConfig.emFormConfig.valueConverter
   );
 
   const formGroupContext = useContext(FormGroupContext);
