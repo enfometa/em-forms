@@ -245,6 +245,16 @@ class EmFormsCore {
     return modelToUpdate;
   };
 
+  toArray = () => {
+    let arr = [];
+    this.formsConfig.forms.map((item, index) => {
+      let obj = {}
+      obj[item.name] = item.value;
+      arr.push(obj)
+    });
+    return arr;
+  };
+
   setValuesFromModel = (obj, setDefaults = true) => {
     if (obj !== null) {
       Object.keys(obj).map((item) => {
