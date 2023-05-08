@@ -35,6 +35,7 @@ declare module "@enfometa/em-forms" {
     value: any;
     validators: Validator[];
     onChange?: (value: any) => void;
+    valueConverter: (value : any) => any
   }
 
   interface KeyValue {

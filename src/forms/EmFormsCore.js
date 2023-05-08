@@ -186,6 +186,9 @@ class EmFormsCore {
     }
     let form = this.getForm(formName);
     if (form !== undefined && form !== null) {
+      if (form.valueConverter) {
+        value = form.valueConverter(value)
+      }
       form.value = value;
       this.triggerOnChange(form);
       if (!isNullOrUndefined(this.model)) {
