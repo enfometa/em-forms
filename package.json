@@ -5,7 +5,7 @@
   "license": "MIT",
   "author": "enfometa <enfometa@gmail.com> (https://www.enfometa.com/)",
   "main": "dist/index.js",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "private": false,
   "keywords": [
     "react",
